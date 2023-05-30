@@ -22,6 +22,17 @@ locals {
     ]
   ])
 
+  auth = flatten([
+    for namespaces in var.config_yaml_file : [
+      for namespace in namespaces : [
+        for topic in namespace.topics : {
+          "name"          = topic.name,
+          "authorization" = topic.authorization,
+        }
+      ]
+    ]
+  ])
+
 }
 
 resource "azurerm_servicebus_namespace" "this" {
@@ -80,6 +91,25 @@ resource "azurerm_servicebus_topic" "this" {
 
 }
 
+resource "azurerm_servicebus_topic_authorization_rule" "this" {
+  for_each = {
+    for topic in local.auth : "${topic.name}-${topic.authorization.name}" =>
+    merge(topic.authorization, { id = azurerm_servicebus_topic.this[topic.name].id })
+    if can(topic.authorization.name)
+  }
 
-#   enable_partitioning = true
-# }
+  name     = each.key
+  topic_id = each.value.id
+  listen   = try(each.value.listen, true)
+  send     = try(each.value.send, true)
+  manage   = try(each.value.manage, true)
+
+  timeouts {
+    create = try(each.value.timeouts.create, null)
+    delete = try(each.value.timeouts.delete, null)
+    read   = try(each.value.timeouts.read, null)
+    update = try(each.value.timeouts.update, null)
+  }
+
+}
+

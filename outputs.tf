@@ -8,6 +8,9 @@ output "servicebus_topics" {
   value = module.azure_servicebus.service_bus_topics
 }
 
-output "servicebus_namespace_ids" {
-  value = module.azure_servicebus_namespace.service_bus_namespace_ids
+output "servicebus_auth_rules" {
+  value     = module.azure_servicebus.service_bus_auth_rules
+  sensitive = true
+}
+
 }

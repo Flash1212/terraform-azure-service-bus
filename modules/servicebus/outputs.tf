@@ -1,3 +1,5 @@
+# modules/servicebuss/outputs.tf
+
 output "service_bus_namespaces" {
   value = {
     for k, namespace in azurerm_servicebus_namespace.this : namespace.name => namespace.id
