@@ -1,5 +1,9 @@
 # outputs.tf
 
+output "key_vault" {
+  value = module.azure_key_vault.key_vault
+}
+
 output "servicebus_namespace" {
   value = module.azure_servicebus.service_bus_namespaces
 }

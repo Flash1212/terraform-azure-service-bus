@@ -10,6 +10,9 @@ data "azuread_user" "user" {
 }
 
 locals {
+  #### Keyvault parameters
+  # Enable/Disable Keyvault
+  enable_keyvault = true
   # Merge service principal and additional users for keyvault access
   access_policy_objects = concat(local.imported_access_objects, local.service_principal_access_object)
   imported_access_objects = flatten([
@@ -45,4 +48,16 @@ module "azure_servicebus" {
 
 }
 
+module "azure_key_vault" {
+  source = "./modules/key-vault/"
+
+  access_policy_objects      = local.access_policy_objects
+  auth_rule_secrets          = module.azure_servicebus.service_bus_auth_rules
+  enable_keyvault            = local.enable_keyvault == true ? true : false
+  env                        = var.env
+  rg_name                    = module.azure_resource_group.rg_name
+  rg_location                = module.azure_resource_group.rg_location
+  soft_delete_retention_days = 7
+  tenant_id                  = local.tenant_id
+  workload                   = var.workload
 }
