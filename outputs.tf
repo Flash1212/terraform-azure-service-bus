@@ -3,6 +3,9 @@
 output "servicebus_namespace" {
   value = module.azure_servicebus.service_bus_namespaces
 }
+
+output "servicebus_topics" {
+  value = module.azure_servicebus.service_bus_topics
 }
 
 output "servicebus_namespace_ids" {
