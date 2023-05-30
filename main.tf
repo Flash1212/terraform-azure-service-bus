@@ -19,5 +19,9 @@ module "azure_servicebus_namespace" {
   source = "./modules/servicebus/"
 
   config_yaml_file = local.config_yaml_file
+  rg_name          = module.azure_resource_group.rg_name
+  rg_location      = module.azure_resource_group.rg_location
+
+}
 
 }
