@@ -19,13 +19,9 @@ variable "workload" {
     "What workload is this resource intended for? ie: keyvault, servicebus,
     apps, vms"
     EOF
-  default     = "servicebus"
+  default     = "svcbus"
   type        = string
 }
-
-# variable "service_bus_namespaces" {
-#   description = "Map of service bus namespaces."
-# }
 
 variable "serviceprinciple_id" {
   description = "The Client ID which should be used. to connect to Azure"

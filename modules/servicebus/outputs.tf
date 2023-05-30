@@ -1,7 +1,9 @@
-output "service_bus_namespace_name" {
+output "service_bus_namespaces" {
   value = {
-    for k, namespace in azurerm_servicebus_namespace.namespace : namespace.name => namespace.id
+    for k, namespace in azurerm_servicebus_namespace.this : namespace.name => namespace.id
   }
+}
+
 }
 
 output "service_bus_namespace_ids" {

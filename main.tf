@@ -15,7 +15,7 @@ module "azure_resource_group" {
   workload = var.workload
 }
 
-module "azure_servicebus_namespace" {
+module "azure_servicebus" {
   source = "./modules/servicebus/"
 
   config_yaml_file = local.config_yaml_file

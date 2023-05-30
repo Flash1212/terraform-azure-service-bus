@@ -1,19 +1,41 @@
 # sb.tf
 
 locals {
-  yaml_sb= yamldecode(file("${path.module}/config.yaml")).nameSpaces
+  namespaces = flatten([
+    for namespaces in var.config_yaml_file : [
+      for namespace in namespaces : {
+        "name" : namespace.name
+        "options" : namespace.options
+      }
+    ]
+  ])
+
 }
 
-resource "azurerm_servicebus_namespace" "namespace" {
-  count = length(local.yaml_sb)
-  name                = local.yaml_sb[count.index].name
-  location            = var.resource_group_location
-  resource_group_name = var.resource_group_name
-  sku                 = "Standard"
+resource "azurerm_servicebus_namespace" "this" {
+  for_each = {
+    for namespace in local.namespaces : namespace.name => namespace
+    if can(namespace.name)
+  }
+
+  name                = each.key
+  location            = var.rg_location
+  resource_group_name = var.rg_name
+  capacity            = try(each.value.options.capacity, null)
+  sku                 = try(each.value.options.sku, "Standard")
+  zone_redundant      = try(each.value.options.zone_redundant, null)
+
+  timeouts {
+    create = try(each.value.options.timeouts.create, null)
+    delete = try(each.value.options.timeouts.delete, null)
+    read   = try(each.value.options.timeouts.read, null)
+    update = try(each.value.options.timeouts.update, null)
+  }
 
   tags = {
     source = "terraform"
   }
+
 }
 
 # resource "azurerm_servicebus_topic" "topic" {
