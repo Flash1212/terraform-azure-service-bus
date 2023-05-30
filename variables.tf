@@ -1,3 +1,4 @@
+# variables.tf
 
 variable "env" {
   description = "What environment is this for? ie: dev, qa, uat, prod"
@@ -44,4 +45,11 @@ variable "tenant_id" {
         Identity of this Container Registry.
         EOF
   type        = string
+}
+
+variable "user_mail" {
+  default     = []
+  description = "A list of user principal names  to grant access to keyvault"
+  type        = list(string)
+
 }
