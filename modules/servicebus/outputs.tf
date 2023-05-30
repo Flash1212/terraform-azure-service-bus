@@ -43,6 +43,11 @@ output "service_bus_subscriptions" {
   ]
 }
 
-output "service_bus_namespace_ids" {
-    value = azurerm_servicebus_namespace.namespace[*].id
+output "service_bus_queues" {
+  value = [
+    for k, queues in azurerm_servicebus_queue.this : {
+      "name" = queues.name,
+      "id"   = queues.id
+    }
+  ]
 }

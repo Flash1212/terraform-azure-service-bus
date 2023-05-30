@@ -17,4 +17,6 @@ output "servicebus_subscriptions" {
   value = module.azure_servicebus.service_bus_subscriptions
 }
 
+output "servicebus_queues" {
+  value = module.azure_servicebus.service_bus_queues
 }
