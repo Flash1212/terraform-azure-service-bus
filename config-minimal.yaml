@@ -1,0 +1,22 @@
+---
+- namespace: # required key if namespace is desired
+    name: "name-space-1" # required - string
+    options: # required key
+    topics: # Required key. If no topics are desired set to `{}`
+      - name: topic-a # required - string
+        options: # required key if list is active
+        authorization: # required
+          name: topic-auth-rule # required - string
+        subscriptions: # Required key. If no subscriptions are desired set to `{}`
+          - name: subscription-1 # required - string
+            options: {} # Required key. If no options are desired set to `{}`
+    queues: {} # Required key. If no queues are desired set to `{}`
+
+- namespace: # required key if namespace is desired
+    name: "name-space-2" # required - string
+    options: # required key
+      sku: Standard # required - string
+    topics: {} # Required key. If no topics are desired set to `{}`
+    queues: # Required key. If no queues are desired set to `{}`
+      - name: queue-1 # required - string
+        options: # required key if list is active

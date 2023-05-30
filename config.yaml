@@ -1,0 +1,388 @@
+---
+- namespace: # required key if namespace is desired
+    name: "name-space-1" # required - string
+    options: # required key
+      capacity: # optional - number
+      sku: Standard # optional - string - defaults to standard
+      zone_redundant: # optional - bool
+      timeouts: # single block
+        create: # optional - string
+        delete: # optional - string
+        read: # optional - string
+        update: # optional - string
+    topics: # Required key. If no topics are desired set to `{}`
+      - name: topic-a # required - string
+        options: # required key if list is active
+          auto_delete_on_idle:  # optional computed - string
+          default_message_ttl:  # optional computed - string
+          duplicate_detection_history_time_window:  # optional computed - string
+          enable_batched_operations:  # optional - bool
+          enable_express:  # optional - bool
+          enable_partitioning:  # optional - bool
+          max_message_size_in_kilobytes:  # optional computed - number
+          max_size_in_megabytes:  # optional computed - number
+          requires_duplicate_detection:  # optional - bool
+          status: Active # optional - string
+          support_ordering:  # optional - bool
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+        authorization: # required
+          name: topic-auth-rule # required - string
+          export_to_keyvault: false # optional - defaults true
+          listen: true # optional - bool - defaults true
+          send: true # optional - bool - defaults true
+          manage: true # optional - bool (to be true, both listen & manage must be true) - defaults true
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+        subscriptions: # Required key. If no subscriptions are desired set to `{}`
+          - name: subscription-1 # required - string
+            options: # Required key. If no options are desired set to `{}`
+              auto_delete_on_idle:  # optional computed - string
+              client_scoped_subscription_enabled: # optional - bool
+              dead_lettering_on_filter_evaluation_error:  # optional - bool
+              dead_lettering_on_message_expiration:  # optional - bool
+              default_message_ttl:  # optional computed - string
+              enable_batched_operations:  # optional - bool
+              forward_dead_lettered_messages_to:  # optional - string
+              forward_to:  # optional - string
+              lock_duration:  # optional computed - string
+              max_delivery_count: 1 # required - number
+              requires_session:  # optional - bool
+              status:  # optional - string
+              timeouts:  # single block
+                create:  # optional - string
+                delete:  # optional - string
+                read:  # optional - string
+                update:  # optional - string
+          - name: subscription-2 # required - string
+            options: # Required key. If no options are desired set to `{}`
+              auto_delete_on_idle:  # optional computed - string
+              client_scoped_subscription_enabled: # optional - bool
+              dead_lettering_on_filter_evaluation_error:  # optional - bool
+              dead_lettering_on_message_expiration:  # optional - bool
+              default_message_ttl:  # optional computed - string
+              enable_batched_operations:  # optional - bool
+              forward_dead_lettered_messages_to:  # optional - string
+              forward_to:  # optional - string
+              lock_duration:  # optional computed - string
+              max_delivery_count: 1 # required - number
+              requires_session:  # optional - bool
+              status:  # optional - string
+              timeouts:  # single block
+                create:  # optional - string
+                delete:  # optional - string
+                read:  # optional - string
+                update:  # optional - string
+      - name: topic-b # required - string
+        options: # required key if list is active
+          auto_delete_on_idle:  # optional computed - string
+          default_message_ttl:  # optional computed - string
+          duplicate_detection_history_time_window:  # optional computed - string
+          enable_batched_operations:  # optional - bool
+          enable_express:  # optional - bool
+          enable_partitioning:  # optional - bool
+          max_message_size_in_kilobytes:  # optional computed - number
+          max_size_in_megabytes:  # optional computed - number
+          requires_duplicate_detection:  # optional - bool
+          status: Active # optional - string
+          support_ordering:  # optional - bool
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+        authorization: # required
+          name: topic-auth-rule # required - string
+          listen: true # optional - bool
+          send: true # optional - bool
+          manage: true # optional - bool (to be true, both listen & manage must be true)
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+        subscriptions: # Required key. If no subscriptions are desired set to `{}`
+          - name: subscription-1 # required - string
+            options: # Required key. If no options are desired set to `{}`
+              auto_delete_on_idle:  # optional computed - string
+              client_scoped_subscription_enabled: # optional - bool
+              dead_lettering_on_filter_evaluation_error:  # optional - bool
+              dead_lettering_on_message_expiration:  # optional - bool
+              default_message_ttl:  # optional computed - string
+              enable_batched_operations:  # optional - bool
+              forward_dead_lettered_messages_to:  # optional - string
+              forward_to:  # optional - string
+              lock_duration:  # optional computed - string
+              max_delivery_count: 1 # required - number
+              requires_session:  # optional - bool
+              status:  # optional - string
+              timeouts:  # single block
+                create:  # optional - string
+                delete:  # optional - string
+                read:  # optional - string
+                update:  # optional - string
+          - name: subscription-2 # required - string
+            options: # Required key. If no options are desired set to `{}`
+              auto_delete_on_idle:  # optional computed - string
+              client_scoped_subscription_enabled: # optional - bool
+              dead_lettering_on_filter_evaluation_error:  # optional - bool
+              dead_lettering_on_message_expiration:  # optional - bool
+              default_message_ttl:  # optional computed - string
+              enable_batched_operations:  # optional - bool
+              forward_dead_lettered_messages_to:  # optional - string
+              forward_to:  # optional - string
+              lock_duration:  # optional computed - string
+              max_delivery_count: 1 # required - number
+              requires_session:  # optional - bool
+              status:  # optional - string
+              timeouts:  # single block
+                create:  # optional - string
+                delete:  # optional - string
+                read:  # optional - string
+                update:  # optional - string
+    queues: # Required key. If no queues are desired set to `{}`
+      - name: queue-1 # required - string
+        options: # required key if list is active
+          auto_delete_on_idle:  # optional computed - string
+          dead_lettering_on_message_expiration:  # optional - bool
+          default_message_ttl:  # optional computed - string
+          duplicate_detection_history_time_window:  # optional computed - string
+          enable_batched_operations:  # optional - bool
+          enable_express:  # optional - bool
+          enable_partitioning:  # optional - bool
+          forward_dead_lettered_messages_to:  # optional - string
+          forward_to:  # optional - string
+          lock_duration:  # optional computed - string
+          max_delivery_count:  # optional - number
+          max_message_size_in_kilobytes:  # optional - number
+          max_size_in_megabytes:  # optional computed - number
+          requires_duplicate_detection:  # optional - bool
+          requires_session:  # optional - bool
+          status: Active # optional - string
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+      - name: queue-2 # required - string
+        options: # required key if list is active
+          auto_delete_on_idle:  # optional computed - string
+          dead_lettering_on_message_expiration:  # optional - bool
+          default_message_ttl:  # optional computed - string
+          duplicate_detection_history_time_window:  # optional computed - string
+          enable_batched_operations:  # optional - bool
+          enable_express:  # optional - bool
+          enable_partitioning:  # optional - bool
+          forward_dead_lettered_messages_to:  # optional - string
+          forward_to:  # optional - string
+          lock_duration:  # optional computed - string
+          max_delivery_count:  # optional - number
+          max_message_size_in_kilobytes:  # optional - number
+          max_size_in_megabytes:  # optional computed - number
+          requires_duplicate_detection:  # optional - bool
+          requires_session:  # optional - bool
+          status: Active # optional - string
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+- namespace: # required key if namespace is desired
+    name: "name-space-2" # required - string
+    options: # required key
+      capacity: # optional - number
+      sku: Standard # optional - string - defaults to standard
+      zone_redundant: # optional - bool
+      timeouts: # single block
+        create: # optional - string
+        delete: # optional - string
+        read: # optional - string
+        update: # optional - string
+    topics: # Required key. If no topics are desired set to `{}`
+      - name: topic-c # required - string
+        options: # required key if list is active
+          auto_delete_on_idle:  # optional computed - string
+          default_message_ttl:  # optional computed - string
+          duplicate_detection_history_time_window:  # optional computed - string
+          enable_batched_operations:  # optional - bool
+          enable_express:  # optional - bool
+          enable_partitioning:  # optional - bool
+          max_message_size_in_kilobytes:  # optional computed - number
+          max_size_in_megabytes:  # optional computed - number
+          requires_duplicate_detection:  # optional - bool
+          status: Active # optional - string
+          support_ordering:  # optional - bool
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+        authorization: # required
+          name: topic-auth-rule # required - string
+          listen: true # optional - bool
+          send: true # optional - bool
+          manage: true # optional - bool (to be true, both listen & manage must be true)
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+        subscriptions: # Required key. If no subscriptions are desired set to `{}`
+          - name: subscription-1 # required - string
+            options: # Required key. If no options are desired set to `{}`
+              auto_delete_on_idle:  # optional computed - string
+              client_scoped_subscription_enabled: # optional - bool
+              dead_lettering_on_filter_evaluation_error:  # optional - bool
+              dead_lettering_on_message_expiration:  # optional - bool
+              default_message_ttl:  # optional computed - string
+              enable_batched_operations:  # optional - bool
+              forward_dead_lettered_messages_to:  # optional - string
+              forward_to:  # optional - string
+              lock_duration:  # optional computed - string
+              max_delivery_count: 1 # required - number
+              requires_session:  # optional - bool
+              status:  # optional - string
+              timeouts:  # single block
+                create:  # optional - string
+                delete:  # optional - string
+                read:  # optional - string
+                update:  # optional - string
+          - name: subscription-2 # required - string
+            options: # Required key. If no options are desired set to `{}`
+              auto_delete_on_idle:  # optional computed - string
+              client_scoped_subscription_enabled: # optional - bool
+              dead_lettering_on_filter_evaluation_error:  # optional - bool
+              dead_lettering_on_message_expiration:  # optional - bool
+              default_message_ttl:  # optional computed - string
+              enable_batched_operations:  # optional - bool
+              forward_dead_lettered_messages_to:  # optional - string
+              forward_to:  # optional - string
+              lock_duration:  # optional computed - string
+              max_delivery_count: 1 # required - number
+              requires_session:  # optional - bool
+              status:  # optional - string
+              timeouts:  # single block
+                create:  # optional - string
+                delete:  # optional - string
+                read:  # optional - string
+                update:  # optional - string
+      - name: topic-d # required - string
+        options: # required key if list is active
+          auto_delete_on_idle:  # optional computed - string
+          default_message_ttl:  # optional computed - string
+          duplicate_detection_history_time_window:  # optional computed - string
+          enable_batched_operations:  # optional - bool
+          enable_express:  # optional - bool
+          enable_partitioning:  # optional - bool
+          max_message_size_in_kilobytes:  # optional computed - number
+          max_size_in_megabytes:  # optional computed - number
+          requires_duplicate_detection:  # optional - bool
+          status: Active # optional - string
+          support_ordering:  # optional - bool
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+        authorization: # required
+          name: topic-auth-rule # required - string
+          listen: true # optional - bool
+          send: true # optional - bool
+          manage: true # optional - bool (to be true, both listen & manage must be true)
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+        subscriptions: # Required key. If no subscriptions are desired set to `{}`
+          - name: subscription-1 # required - string
+            options: # Required key. If no options are desired set to `{}`
+              auto_delete_on_idle:  # optional computed - string
+              client_scoped_subscription_enabled: # optional - bool
+              dead_lettering_on_filter_evaluation_error:  # optional - bool
+              dead_lettering_on_message_expiration:  # optional - bool
+              default_message_ttl:  # optional computed - string
+              enable_batched_operations:  # optional - bool
+              forward_dead_lettered_messages_to:  # optional - string
+              forward_to:  # optional - string
+              lock_duration:  # optional computed - string
+              max_delivery_count: 1 # required - number
+              requires_session:  # optional - bool
+              status:  # optional - string
+              timeouts:  # single block
+                create:  # optional - string
+                delete:  # optional - string
+                read:  # optional - string
+                update:  # optional - string
+          - name: subscription-2 # required - string
+            options: # Required key. If no options are desired set to `{}`
+              auto_delete_on_idle:  # optional computed - string
+              client_scoped_subscription_enabled: # optional - bool
+              dead_lettering_on_filter_evaluation_error:  # optional - bool
+              dead_lettering_on_message_expiration:  # optional - bool
+              default_message_ttl:  # optional computed - string
+              enable_batched_operations:  # optional - bool
+              forward_dead_lettered_messages_to:  # optional - string
+              forward_to:  # optional - string
+              lock_duration:  # optional computed - string
+              max_delivery_count: 1 # required - number
+              requires_session:  # optional - bool
+              status:  # optional - string
+              timeouts:  # single block
+                create:  # optional - string
+                delete:  # optional - string
+                read:  # optional - string
+                update:  # optional - string
+    queues: # Required key. If no queues are desired set to `{}`
+      - name: queue-1 # required - string
+        options: # required key if list is active
+          auto_delete_on_idle:  # optional computed - string
+          dead_lettering_on_message_expiration:  # optional - bool
+          default_message_ttl:  # optional computed - string
+          duplicate_detection_history_time_window:  # optional computed - string
+          enable_batched_operations:  # optional - bool
+          enable_express:  # optional - bool
+          enable_partitioning:  # optional - bool
+          forward_dead_lettered_messages_to:  # optional - string
+          forward_to:  # optional - string
+          lock_duration:  # optional computed - string
+          max_delivery_count:  # optional - number
+          max_message_size_in_kilobytes:  # optional - number
+          max_size_in_megabytes:  # optional computed - number
+          requires_duplicate_detection:  # optional - bool
+          requires_session:  # optional - bool
+          status: Active # optional - string
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
+      - name: queue-2 # required - string
+        options: # required key if list is active
+          auto_delete_on_idle:  # optional computed - string
+          dead_lettering_on_message_expiration:  # optional - bool
+          default_message_ttl:  # optional computed - string
+          duplicate_detection_history_time_window:  # optional computed - string
+          enable_batched_operations:  # optional - bool
+          enable_express:  # optional - bool
+          enable_partitioning:  # optional - bool
+          forward_dead_lettered_messages_to:  # optional - string
+          forward_to:  # optional - string
+          lock_duration:  # optional computed - string
+          max_delivery_count:  # optional - number
+          max_message_size_in_kilobytes:  # optional - number
+          max_size_in_megabytes:  # optional computed - number
+          requires_duplicate_detection:  # optional - bool
+          requires_session:  # optional - bool
+          status: Active # optional - string
+          timeouts:  # single block
+            create:  # optional - string
+            delete:  # optional - string
+            read:  # optional - string
+            update:  # optional - string
