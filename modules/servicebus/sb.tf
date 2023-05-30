@@ -1,4 +1,4 @@
-# sb.tf
+# modules/servicebus/sb.tf
 
 locals {
   namespaces = flatten([
@@ -29,6 +29,21 @@ locals {
           "name"          = topic.name,
           "authorization" = topic.authorization,
         }
+      ]
+    ]
+  ])
+
+  subs = flatten([
+    for namespaces in var.config_yaml_file : [
+      for namespace in namespaces : [
+        for topic in namespace.topics : [
+          for subscription in topic.subscriptions : {
+            "namespace" = namespace.name,
+            "topic"     = topic.name,
+            "name"      = subscription.name,
+            "options"   = subscription.options,
+          }
+        ]
       ]
     ]
   ])
@@ -113,3 +128,33 @@ resource "azurerm_servicebus_topic_authorization_rule" "this" {
 
 }
 
+resource "azurerm_servicebus_subscription" "this" {
+  for_each = {
+    for subscription in local.subs : "${subscription.topic}.${subscription.name}" =>
+    merge(subscription, { id = azurerm_servicebus_topic.this[subscription.topic].id })
+    if can(subscription.name)
+  }
+
+  name                                      = each.key
+  topic_id                                  = each.value.id
+  auto_delete_on_idle                       = try(each.value.options.auto_delete_on_idle, null)
+  client_scoped_subscription_enabled        = try(each.value.options.client_scoped_subscription_enabled, null)
+  dead_lettering_on_filter_evaluation_error = try(each.value.options.dead_lettering_on_filter_evaluation_error, null)
+  dead_lettering_on_message_expiration      = try(each.value.options.dead_lettering_on_message_expiration, null)
+  default_message_ttl                       = try(each.value.options.default_message_ttl, null)
+  enable_batched_operations                 = try(each.value.options.enable_batched_operations, null)
+  forward_dead_lettered_messages_to         = try(each.value.options.forward_dead_lettered_messages_to, null)
+  forward_to                                = try(each.value.options.forward_to, null)
+  lock_duration                             = try(each.value.options.lock_duration, null)
+  max_delivery_count                        = try(each.value.options.max_delivery_count, 1)
+  requires_session                          = try(each.value.options.requires_session, null)
+  status                                    = try(each.value.options.status, null)
+
+  timeouts {
+    create = try(each.value.options.timeouts.create, null)
+    delete = try(each.value.options.timeouts.delete, null)
+    read   = try(each.value.options.timeouts.read, null)
+    update = try(each.value.options.timeouts.update, null)
+  }
+
+}

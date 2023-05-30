@@ -34,6 +34,13 @@ output "service_bus_auth_rules" {
   ]
 }
 
+output "service_bus_subscriptions" {
+  value = [
+    for k, subscriptions in azurerm_servicebus_subscription.this : {
+      "name" = subscriptions.name,
+      "id"   = subscriptions.id
+    }
+  ]
 }
 
 output "service_bus_namespace_ids" {

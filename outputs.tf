@@ -13,4 +13,8 @@ output "servicebus_auth_rules" {
   sensitive = true
 }
 
+output "servicebus_subscriptions" {
+  value = module.azure_servicebus.service_bus_subscriptions
+}
+
 }
