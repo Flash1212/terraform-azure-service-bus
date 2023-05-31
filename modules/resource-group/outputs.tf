@@ -1,8 +1,8 @@
-
-output "resource_group_location" {
+# resource-group/outputs.tf
+output "rg_location" {
   value = azurerm_resource_group.default_rg.location
 }
 
-output "resource_group_name" {
+output "rg_name" {
   value = azurerm_resource_group.default_rg.name
 }

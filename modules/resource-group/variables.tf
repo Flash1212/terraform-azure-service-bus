@@ -2,8 +2,8 @@
 
 variable "env" {
   description = "What environment is this for? ie: dev, qa, uat, prod"
-  default = "dev"
-  type = string
+  default     = "dev"
+  type        = string
 }
 
 variable "location" {

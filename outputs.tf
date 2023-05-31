@@ -1,7 +1,26 @@
-output "servicebus_namespace_names" {
-  value = module.azure_servicebus_namespace.service_bus_namespace_name
+# outputs.tf
+
+output "key_vault" {
+  value = module.azure_key_vault.key_vault
 }
 
-output "servicebus_namespace_ids" {
-  value = module.azure_servicebus_namespace.service_bus_namespace_ids
+output "servicebus_namespace" {
+  value = module.azure_servicebus.service_bus_namespaces
+}
+
+output "servicebus_topics" {
+  value = module.azure_servicebus.service_bus_topics
+}
+
+output "servicebus_auth_rules" {
+  value     = module.azure_servicebus.service_bus_auth_rules
+  sensitive = true
+}
+
+output "servicebus_subscriptions" {
+  value = module.azure_servicebus.service_bus_subscriptions
+}
+
+output "servicebus_queues" {
+  value = module.azure_servicebus.service_bus_queues
 }

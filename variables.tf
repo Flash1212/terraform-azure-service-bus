@@ -1,3 +1,4 @@
+# variables.tf
 
 variable "env" {
   description = "What environment is this for? ie: dev, qa, uat, prod"
@@ -19,13 +20,9 @@ variable "workload" {
     "What workload is this resource intended for? ie: keyvault, servicebus,
     apps, vms"
     EOF
-  default     = "servicebus"
+  default     = "svcbus"
   type        = string
 }
-
-# variable "service_bus_namespaces" {
-#   description = "Map of service bus namespaces."
-# }
 
 variable "serviceprinciple_id" {
   description = "The Client ID which should be used. to connect to Azure"
@@ -48,4 +45,11 @@ variable "tenant_id" {
         Identity of this Container Registry.
         EOF
   type        = string
+}
+
+variable "user_mail" {
+  default     = []
+  description = "A list of user principal names  to grant access to keyvault"
+  type        = list(string)
+
 }
