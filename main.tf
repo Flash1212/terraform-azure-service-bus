@@ -28,7 +28,7 @@ locals {
   tenant_id = data.azurerm_client_config.current.tenant_id
 
   #### Servicebus configuration
-  config_yaml_file = yamldecode(file("./config.yaml"))
+  config_yaml_file = yamldecode(file("./conf/config.yaml"))
 }
 
 module "azure_resource_group" {
