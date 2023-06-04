@@ -28,7 +28,12 @@ locals {
   tenant_id = data.azurerm_client_config.current.tenant_id
 
   #### Servicebus configuration
-  config_yaml_file = yamldecode(file("./conf/config.yaml"))
+  configuration_directory = "./conf/"
+  namespace_files = "namespace*.y*ml"
+  yaml_directory_files = fileset(local.configuration_directory, local.namespace_files)
+  config_yaml_file = flatten([
+    for file in local.yaml_directory_files: [ yamldecode(file("${local.configuration_directory}/${file}")) ]
+  ])
 }
 
 module "azure_resource_group" {
